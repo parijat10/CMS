@@ -1,0 +1,60 @@
+{% extends 'status/base.html' %}
+{%block js_block%}
+<script>
+	$(document).ready(function() {
+		s_tab = document.getElementById('control_tab');
+		s_tab.className = 'active';
+		selectTag1 = document.getElementById('robotSelect');
+	    noOfBots = 6;
+	    for (var i = 0; i<noOfBots; i++){
+	        var opt = document.createElement('option');
+	        opt.innerHTML = "Robot "+(i+1);
+	        opt.value = (i+1);
+	        selectTag1.appendChild(opt);
+	    }
+    	$('#controlDiv').hide();
+    	$('#commandBot').click(main);
+	});
+</script>
+<script type="text/javascript" src="/static/js/pages/controlRobot.js"></script>
+<style type="text/css">
+	.topmar {
+		margin: 50px 0;
+	}
+	#controlDiv {
+		text-align: center;
+	}
+</style>
+{%endblock%}
+{%block title%}
+Control Robot
+{%endblock%}
+{%block body_block%}
+	<img src="../../static/img/map.png" id="mapImg" style="display: none;" />
+	<div class="container topmar" id="selectDiv">
+		<div class="row">
+			<span class="col-md-2"></span>
+			<h3 class="col-md-4">Select a Robot:</h3>
+			<select id="robotSelect" class="select input-lg col-md-4"></select>
+		</div>
+	</div>
+	<div class="container topmar">
+		<div class="row">
+			<span class="col-md-5"></span>
+			<button id="commandBot" class="btn-u btn-u-lg rounded-4x col-md-2">Take Control</button>
+		</div>
+	</div>
+	<div class="container topmar" id="controlDiv">
+		<div class="row">
+			<span class="col-md-2"></span>
+			<canvas id="controlCan" width="640" height="400" class="col-md-5"></canvas>
+			<span class="col-md-5"></span>
+			<div class="col-md-4">
+				<button id="controlBotU" class="arrow btn-u rounded-4x"><img src="/static/img/arrowUp.png" /></button><br>
+				<button id="controlBotL" class="arrow btn-u rounded-4x"><img src="/static/img/arrowLeft.png" /></button>
+				<button id="controlBotD" class="arrow btn-u rounded-4x"><img src="/static/img/arrowDown.png" /></button>
+				<button id="controlBotR" class="arrow btn-u rounded-4x"><img src="/static/img/arrowRight.png" /></button>
+			</div>
+		</div>
+	</div>
+{%endblock%}

@@ -1,0 +1,43 @@
+{% extends 'status/base.html' %}
+{%block js_block%}
+<script>
+	$(document).ready(function() {
+		s_tab = document.getElementById('view_tab');
+		s_tab.className = 'active';
+		selectTag = document.getElementById('robotList');
+	    noOfBots = 6;
+	    for (var i = 0; i<noOfBots; i++){
+	        var opt = document.createElement('option');
+	        opt.innerHTML = "Robot "+(i+1);
+	        opt.value = (i+1);
+	        selectTag.appendChild(opt);
+	    }
+	});
+</script>
+<style type="text/css">
+	#containerMain {
+		margin: 50px 0;
+	}
+</style>
+<script type="text/javascript" src="/static/js/pages/imageTransport.js" ></script>
+{%endblock%}
+{%block title%}
+View Live Feed
+{%endblock%}
+{%block body_block%}
+	<div class="container" id="containerMain">
+		<div class="row">
+			<span class="col-md-1"></span>
+			<div id="imageContainer" class="col-md-8">				
+				<img id="cam_img" src="/static/img/capture0.jpg" />
+			</div>
+			<div class="col-md-3">
+				<select class="select input-lg" id="robotList"></select>
+				<br><br>
+				<h2>Select type of feed:</h2>
+				<h3><input checked type="radio" name="feed" value="live" /> Live</h3>
+				<h3><input type="radio" name="feed" value="depth" /> Depth</h3>
+			</div>
+		</div>
+	</div>
+{%endblock%}

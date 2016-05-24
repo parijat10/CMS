@@ -1,0 +1,12 @@
+{% extends 'status/base.html' %}
+{%block js_block%}
+<script>
+	$(document).ready(function() {
+		s_tab = document.getElementById('home_tab');
+		s_tab.className = 'active';
+	});
+</script>
+{%endblock%}
+{%block title%}
+Home
+{%endblock%}

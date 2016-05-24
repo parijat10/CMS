@@ -1,0 +1,71 @@
+{% extends 'status/base.html' %}
+{%block js_block%}
+<script>
+	$(document).ready(function() {
+		s_tab = document.getElementById('command_tab');
+		s_tab.className = 'active';
+		selectTag1 = document.getElementById('robotSelect');
+	    noOfBots = 6;
+	    for (var i = 0; i<noOfBots; i++){
+	        var opt = document.createElement('option');
+	        opt.innerHTML = "Robot "+(i+1);
+	        opt.value = (i+1);
+	        selectTag1.appendChild(opt);
+	    }
+/*	    selectTag2 = document.getElementById('destSelect');
+	    noOfAisles = 8;
+	    for (var i = 0; i<noOfAisles; i++){
+	        var opt = document.createElement('option');
+	        opt.innerHTML = "Aisle "+String.fromCharCode(i+65);
+	        opt.value = String.fromCharCode(i+65);
+	        selectTag2.appendChild(opt);
+	    }
+*/	});
+</script>
+<script src="../../static/js/pages/commandMap.js"></script>
+<style type="text/css">
+	.topmar {
+		margin: 50px 0;
+	}
+	#mapCanvas {
+		border: 1px solid black;
+		float: left;
+	}
+	#showCoordinates {
+		text-align: center;
+		font-size: 20px;
+	}
+	#mapCanvas:hover {
+		cursor: pointer;
+	}
+</style>
+{%endblock%}
+{%block title%}
+Command Robot
+{%endblock%}
+{%block body_block%}
+	<img src="../../static/img/map.png" id="mapImg" style="display: none;" />
+	<div class="container topmar">
+		<div class="row">
+			<span class="col-md-2"></span>
+			<h3 class="col-md-4">Select a Robot:</h3>
+			<select id="robotSelect" class="select input-lg col-md-4"></select>
+		</div>
+	</div>
+	<div class="container topmar">
+		<div class="row">
+			<span class="col-md-2"></span>
+			<canvas height="400" width="640" id="mapCanvas"></canvas>
+			<span class="col-md-2" id="showCoordinates">
+				<h3>Selected Coordinates</h3>
+				<h4 id="xycoords">None</h4>
+			</span>
+		</div>
+	</div>
+	<div class="container topmar">
+		<div class="row">
+			<span class="col-md-5"></span>
+			<button id="commandBot" class="btn-u btn-u-lg rounded-4x col-md-2">Send Command</button>
+		</div>
+	</div>
+{%endblock%}
