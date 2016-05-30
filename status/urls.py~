@@ -8,5 +8,4 @@ urlpatterns = patterns('',
 		url(r'^view', views.view, name="view"),
 		url(r'^read_coordinates', views.read_coordinates, name="rc"),
 		url(r'^getImage', views.getImage, name="gi"),
-		url(r'^sendCoord', views.sendCoord, name='sendCoord'),	
         )

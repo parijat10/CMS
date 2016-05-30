@@ -1,0 +1,25 @@
+<html>
+<head>
+    {% load socketio_tags %}
+    {% socketio %}
+    <script>
+        var socket = new io.Socket();
+        socket.connect();
+        socket.on('connect', function() {
+		    socket.subscribe('channel1');
+		    socket.on('channel1', function(){
+		    	console.log(arguments);
+		    	x = Array.from(arguments);
+		    })
+		    socket.on('message', function() {
+		    	console.log('message', arguments);
+		    	x = Array.from(arguments);	
+		    })
+		});
+
+    </script>
+</head>
+<body>
+	
+</body>
+</html>

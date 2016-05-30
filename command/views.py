@@ -5,12 +5,17 @@ from django.http import HttpResponse, HttpResponseRedirect, HttpRequest
 from django.contrib.auth.decorators import login_required
 import os, math
 
+import django_socketio
+
 #Create your views here.
 
 @login_required
 def index(request):
 	context = RequestContext(request)
 	return render_to_response('command/index.html', {'username':request.user.username}, context)
+
+def test(request):
+	return render_to_response('command/test.html')
 
 @login_required
 def control(request):
@@ -20,13 +25,13 @@ def control(request):
 def moveBot(request):
 	context = RequestContext(request)
 	if(request.REQUEST['dir'] == 'controlBotU'):
-		os.system('rostopic pub -1 /turtle1/cmd_vel geometry_msgs/Twist -- \'[1.0, 0.0, 0.0]\' \'[0.0, 0.0, 0]\'')
+		django_socketio.broadcast_channel("Up", "channel1")
 	elif(request.REQUEST['dir'] == 'controlBotD'):
-		os.system('rostopic pub -1 /turtle1/cmd_vel geometry_msgs/Twist -- \'[-1.0, 0.0, 0.0]\' \'[0.0, 0.0, 0]\'')
+		django_socketio.broadcast_channel("dowm", "channel1")
 	elif(request.REQUEST['dir'] == 'controlBotL'):
-		os.system('rostopic pub -1 /turtle1/cmd_vel geometry_msgs/Twist -- \'[0.0, 0.0, 0.0]\' \'[0.0, 0.0, 1.570796]\'')
+		django_socketio.broadcast_channel("left", "channel1")
 	else:
-		os.system('rostopic pub -1 /turtle1/cmd_vel geometry_msgs/Twist -- \'[0.0, 0.0, 0.0]\' \'[0.0, 0.0, -1.570796]\'')
+		django_socketio.broadcast_channel("Right", "channel1")
 	return HttpResponse(request.REQUEST['dir'])
 
 def sendCoord(request):

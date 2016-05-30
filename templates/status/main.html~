@@ -1,0 +1,55 @@
+{%extends 'status/base.html'%}
+{%block js_block%}
+<script>
+	$(document).ready(function() {
+		s_tab = document.getElementById('status_tab');
+		s_tab.className = 'active';
+	});
+</script>
+<style type="text/css">
+	#mainContainer {
+		margin-top: 50px;
+		margin-bottom: 50px;
+	}
+	#statusDisplay {
+		margin-top: 30px;
+	}
+	#mapCan {
+		border: 1px solid black;
+	}
+	.colorDot {
+		height: 15px;
+		width: 15px;
+		border-radius: 50px 50px 50px 50px;
+		display: inline-block;
+		margin-right: 3px;
+	}
+	.robotNumber {
+		margin-right: 5px;
+		font-size: 1.2em;
+	}
+	#checkStatus {
+		margin-left: 10px;
+	}
+</style>
+<script src="../../static/js/pages/canvasMap.js" ></script>
+{%endblock%}
+{%block title%}
+Check Status
+{%endblock%}
+{%block body_block%}
+	<img src="../../static/img/map.png" id="mapImg" style="display: none;" />
+	<div class="container" id="mainContainer">
+		<div class="row">
+			<div class="col-md-8">
+				<canvas id="mapCan" height="400" width="640"></canvas>
+				<div id="key"></div>
+			</div>
+			<div class="col-md-4">
+				<select id="robotList" class="select input-lg"></select>
+				<button id="checkStatus" class="btn-u btn-u-lg rounded-4x">Status Details</button>
+				<div id="statusDisplay"></div>
+			</div>
+		</div>
+	</div>
+{%endblock%}

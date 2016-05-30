@@ -23,13 +23,13 @@ function main() {
             keyDiv.appendChild(keySpan);
         })(i);
     };
-    // selectTag = document.getElementById('robotList');
-    // for (var i = 0; i<noOfBots; i++){
-    //     var opt = document.createElement('option');
-    //     opt.innerHTML = "Robot "+(i+1);
-    //     opt.value = (i+1);
-    //     selectTag.appendChild(opt);
-    // }
+    selectTag = document.getElementById('robotList');
+    for (var i = 0; i<noOfBots; i++){
+        var opt = document.createElement('option');
+        opt.innerHTML = "Robot "+(i+1);
+        opt.value = (i+1);
+        selectTag.appendChild(opt);
+    }
     $('#checkStatus').click(
             function() {
                 index = $('#robotList').find(':selected').val()-1;
@@ -39,17 +39,6 @@ function main() {
             }
     );
     window.addEventListener('mousemove', mouse_position);
-
-
-
-
-        canvas.addEventListener('mousemove', function(evt) {
-        var mousePos = getMousePos(canvas, evt);
-        var message = 'Map position: ' + mousePos.x + ',' + mousePos.y;
-        document.getElementById("mapPos").innerHTML = message;
-        // writeMessage(canvas, message);
-      }, false);
-
 }
 
 function drawRobot(color, index)
@@ -65,17 +54,6 @@ function drawRobot(color, index)
     xyCoord[index] = [x, y];
 }
 
-
-      
-      
-// function writeMessage(canvas, message) {
-//         var context = canvas.getContext('2d');
-//         context.clearRect(0, 0, canvas.width, canvas.height);
-//         context.font = '18pt Calibri';
-//         context.fillStyle = 'black';
-//         context.fillText(message, 10, 25);
-//       }
-
 function getMousePos(canvas, evt) {
         var rect = canvas.getBoundingClientRect();
         return {
@@ -83,6 +61,14 @@ function getMousePos(canvas, evt) {
           y: evt.clientY - rect.top
         };
       }
+      var canvas = document.getElementById("mapCan");
+      
+        canvas.addEventListener('mousemove', function(evt) {
+        var mousePos = getMousePos(canvas, evt);
+        var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
+        writeMessage(canvas, message);
+      }, false);
+
 function mouse_position(e)
 {
 	$.ajax({url: '/status/read_coordinates', success: function(r) {

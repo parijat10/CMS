@@ -1,4 +1,5 @@
-from django.conf.urls import patterns, url
+
+from django.conf.urls import patterns, url, include
 from command import views
 
 urlpatterns = patterns('',
@@ -6,5 +7,8 @@ urlpatterns = patterns('',
 		url(r'^index', views.index, name='indexFull'),
 		url(r'^control', views.control, name='control'),
 		url(r'^moveBot', views.moveBot, name='moveBot'),
-		url(r'^sendCoord', views.sendCoord, name='sendCoord'),	
         )
+
+# urlpatterns += [
+#     url("", include('django_socketio.urls')),
+# ]

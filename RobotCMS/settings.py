@@ -43,6 +43,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'authorize',
+    'django_socketio',
 )
 
 MIDDLEWARE_CLASSES = (

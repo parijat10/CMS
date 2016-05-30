@@ -43,10 +43,3 @@ def getImage(request):
         data = f.read()
         imgdata = data.encode("base64")
         return HttpResponse(imgdata)
-
-def sendCoord(request):
-    context = RequestContext(request)
-    coordinates = [request.REQUEST['xcoord'], request.REQUEST['ycoord']]
-    os.system('rostopic pub -1 /turtle1/cmd_vel geometry_msgs/Twist -- '+"\'["+coordinates[0]+", "+coordinates[1]+", 0]\' \'[0, 0, 0]\'")
-    return HttpResponse(coordinates)
-

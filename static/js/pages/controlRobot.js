@@ -13,17 +13,17 @@ function main() {
         $('.arrow').off();
     });
     $('.arrow').click(function(e) {
-            moveRobot(e);
+            moveRobot(this);
     });
     con = canvas.getContext("2d");
     con.drawImage(document.getElementById("mapImg"), 0, 0, canvas.width, canvas.height);
     con.strokeRect(0,0,canvas.width, canvas.height);
 }
 
-function moveRobot(e) {
+function moveRobot(btn) {
     $.ajax({
         url: '/command/moveBot', 
-        data: {'dir': e.target.id}, 
+        data: {'dir': btn.id}, 
         success: function(r) {
             console.log('Move call over!', r);
         }

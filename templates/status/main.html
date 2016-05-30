@@ -6,6 +6,31 @@
 		s_tab.className = 'active';
 	});
 </script>
+
+<script>
+	$(document).ready(function() {
+		s_tab = document.getElementById('command_tab');
+		s_tab.className = 'active';
+		selectTag1 = document.getElementById('robotSelect');
+	    noOfBots = 6;
+	    for (var i = 0; i<noOfBots; i++){
+	        var opt = document.createElement('option');
+	        opt.innerHTML = "Robot "+(i+1);
+	        opt.value = (i+1);
+	        selectTag1.appendChild(opt);
+	    }
+/*	    selectTag2 = document.getElementById('destSelect');
+	    noOfAisles = 8;
+	    for (var i = 0; i<noOfAisles; i++){
+	        var opt = document.createElement('option');
+	        opt.innerHTML = "Aisle "+String.fromCharCode(i+65);
+	        opt.value = String.fromCharCode(i+65);
+	        selectTag2.appendChild(opt);
+	    }
+*/	});
+</script>
+<script src="../../static/js/pages/commandMap.js"></script>
+
 <style type="text/css">
 	#mainContainer {
 		margin-top: 50px;
@@ -13,7 +38,9 @@
 	}
 	#statusDisplay {
 		margin-top: 30px;
+		font-size: 5em;
 	}
+	
 	#mapCan {
 		border: 1px solid black;
 	}
@@ -31,6 +58,13 @@
 	#checkStatus {
 		margin-left: 10px;
 	}
+	#showCoordinates {
+		text-align: center;
+		font-size: 20px;
+	}
+	#mapCanvas:hover {
+		cursor: pointer;
+	}
 </style>
 <script src="../../static/js/pages/canvasMap.js" ></script>
 {%endblock%}
@@ -38,18 +72,35 @@
 Check Status
 {%endblock%}
 {%block body_block%}
-	<img src="../../static/img/map.png" id="mapImg" style="display: none;" />
+	<img src="../../static/img/map1.png" id="mapImg" style="display: none;" />
 	<div class="container" id="mainContainer">
 		<div class="row">
 			<div class="col-md-8">
 				<canvas id="mapCan" height="400" width="640"></canvas>
 				<div id="key"></div>
 			</div>
-			<div class="col-md-4">
+			<!-- <div class="col-md-4">
 				<select id="robotList" class="select input-lg"></select>
-				<button id="checkStatus" class="btn-u btn-u-lg rounded-4x">Status Details</button>
+				<button id="checkStatus" class="btn-u btn-u-lg rounded-4x">Map position</button>
 				<div id="statusDisplay"></div>
-			</div>
+			</div> -->
+			<div id="mapPos" class="col-md-4"></div>
+			<div class="row">
+			<span class="col-md-4"></span>
+			<h3 class="col-md-4">Select a Robot:</h3>
+			<select id="robotSelect" class="select input-lg col-md-4"></select>
+			<span class="col-md-4" id="showCoordinates">
+				<h3>Selected Coordinates</h3>
+				<h4 id="xycoords">None</h4>
+			</span>
+
+			<span class="col-md-4"></span>
+			<button id="commandBot" class="btn-u btn-u-lg rounded-4x col-md-4">Send Command</button>
+		</div>
+
+
+
 		</div>
 	</div>
+
 {%endblock%}

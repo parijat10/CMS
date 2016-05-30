@@ -4,7 +4,7 @@ xyCoord = [];
 coordinates = [0, 0];
 
 function main() {
-    canvas = document.getElementById("mapCanvas");
+    canvas = document.getElementById("mapCan");
     con = canvas.getContext("2d");
     con.drawImage(document.getElementById("mapImg"), 0, 0, canvas.width, canvas.height);
     canvas.addEventListener("click", function(e) {
