@@ -1,6 +1,9 @@
 colorList = ['red', 'green', 'blue', 'yellow', 'purple', 'orange', 'pink', 'aquamarine', 'brown', 'silver'];
 noOfBots = 9;
+
+console.log("start")
 function main() {
+    console.log("start1")
     canvas = document.getElementById("controlCan");
     $('#controlDiv').show();
     $('#selectDiv').hide();
@@ -21,6 +24,7 @@ function main() {
 }
 
 function moveRobot(btn) {
+    console.log(btn.id);
     $.ajax({
         url: '/command/moveBot', 
         data: {'dir': btn.id}, 

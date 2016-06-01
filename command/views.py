@@ -5,17 +5,42 @@ from django.http import HttpResponse, HttpResponseRedirect, HttpRequest
 from django.contrib.auth.decorators import login_required
 import os, math
 
-import django_socketio
+
+
+
+import socket, select, string, sys
+ 
+def prompt() :
+    sys.stdout.write('<You> ')
+    sys.stdout.flush()
+ 
+#main function
+
+host = ''	
+port = 5000
+ 
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.settimeout(2)
+ 
+# connect to remote host
+try :
+    s.connect((host, port))
+except :
+    print 'Unable to connect'
+    sys.exit()
+ 
+print 'Connected to remote host. Start sending messages'
+
+ 
+
+# import django_socketio
 
 #Create your views here.
-
+# 
 @login_required
 def index(request):
 	context = RequestContext(request)
 	return render_to_response('command/index.html', {'username':request.user.username}, context)
-
-def test(request):
-	return render_to_response('command/test.html')
 
 @login_required
 def control(request):
@@ -24,15 +49,16 @@ def control(request):
 
 def moveBot(request):
 	context = RequestContext(request)
-	if(request.REQUEST['dir'] == 'controlBotU'):
-		django_socketio.broadcast_channel("Up", "channel1")
-	elif(request.REQUEST['dir'] == 'controlBotD'):
-		django_socketio.broadcast_channel("dowm", "channel1")
-	elif(request.REQUEST['dir'] == 'controlBotL'):
-		django_socketio.broadcast_channel("left", "channel1")
+	socket_list = [sys.stdin, s]
+	if(request.GET['dir'] == 'controlBotU'):
+		s.send("2,up")
+	elif(request.GET['dir'] == 'controlBotD'):
+		s.send("2,down")
+	elif(request.GET['dir'] == 'controlBotL'):
+		s.send("2,left")
 	else:
-		django_socketio.broadcast_channel("Right", "channel1")
-	return HttpResponse(request.REQUEST['dir'])
+		s.send("2,right")
+	return HttpResponse(request.GET['dir'])
 
 def sendCoord(request):
     context = RequestContext(request)
